@@ -1,0 +1,34 @@
+- set_fact:
+    fish_bin: '{{ brew_bin_path }}/fish'
+
+- name: install fish
+  homebrew:
+    name:  fish
+    state: present
+
+- name: add fish to /etc/shells
+  lineinfile:
+    dest: /etc/shells
+    line: '{{ fish_bin }}'
+  become: yes
+
+- name: change login shell to fish
+  command: |
+    chpass -s '{{ fish_bin }}'
+  become: yes
+  register: chpass_result
+  until: chpass_result.rc == 0
+  retries: 3
+  when: |
+    lookup("env", "SHELL") != fish_bin
+
+- name: Check if fisher is installed
+  command: "fisher -v"
+  register: fisher
+  changed_when: false
+
+- name: install fisher
+  get_url:
+    url: "https://git.io/fisher"
+    dest: "~/.config/fish/functions/fisher.fish"
+  when: "'fisher' not in fisher.stdout"

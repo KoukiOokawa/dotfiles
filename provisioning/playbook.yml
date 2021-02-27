@@ -13,6 +13,11 @@
     - role: link
       tags: ['basic', 'basic.link']
 
+    #  system
+    #-----------------------------------------------
+    - role: fish
+      tags: ['system', 'system.fish']
+
     # install 
     #-----------------------------------------------
     # - role: homebrew
