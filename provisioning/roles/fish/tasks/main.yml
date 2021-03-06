@@ -22,13 +22,7 @@
   when: |
     lookup("env", "SHELL") != fish_bin
 
-- name: Check if fisher is installed
-  command: "fisher -v"
-  register: fisher
-  changed_when: false
-
 - name: install fisher
   get_url:
     url: "https://git.io/fisher"
     dest: "~/.config/fish/functions/fisher.fish"
-  when: "'fisher' not in fisher.stdout"
