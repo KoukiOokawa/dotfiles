@@ -22,7 +22,6 @@ homebrew:
     - karabiner-elements
     - visual-studio-code
     - google-chrome
-    - jetbrains-toolbox
 
   packages:
     - docker
