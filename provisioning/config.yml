@@ -10,6 +10,7 @@ homebrew:
     - homebrew/cask
     - homebrew/cask-fonts
     - homebrew/core
+    - homebrew/cask-versions
 
   applications:
     - adoptopenjdk8
